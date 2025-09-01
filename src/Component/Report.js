@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Download, Mail, ArrowLeft, TrendingUp, Users, Target, AlertTriangle, Share2, Bookmark, RefreshCw, Brain, Sparkles, ChevronDown, ChevronUp, DollarSign, Calendar, Shield, Zap, Star, Globe, BarChart3, Lightbulb, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { Download, Mail, ArrowLeft, TrendingUp, Users, Target, Share2, Bookmark, RefreshCw, Brain, ChevronDown, ChevronUp, DollarSign, Calendar, Shield, Zap, Star, BarChart3, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -9,7 +9,7 @@ const Report = ({ data }) => {
   const [validationData, setValidationData] = useState(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [showComparison, setShowComparison] = useState(false);
+
   const [expandedSections, setExpandedSections] = useState({
     customerProfile: false,
     competitors: false,

@@ -65,16 +65,58 @@ const ValidationForm = ({ user }) => {
       setIsLoading(false);
       setIsComplete(true);
       
-      // Generate mock validation results
+      // Generate mock validation results with scores out of 10
+      const demandScore = Math.floor(Math.random() * 10) + 1; // 1-10
+      const competitionScore = Math.floor(Math.random() * 10) + 1; // 1-10
+      const urgencyScore = Math.floor(Math.random() * 10) + 1; // 1-10
+      const overallScore = Math.round((demandScore + competitionScore + urgencyScore) / 3);
+      
+      let recommendation = '';
+      let recommendationColor = '';
+      let validationStatus = '';
+      let reasons = [];
+      
+      if (overallScore >= 8) {
+        recommendation = '🚀 Go for validation!';
+        recommendationColor = '#166534';
+        validationStatus = 'VALIDATE';
+        reasons = [
+          'Strong market demand with clear customer pain points',
+          'Competitive landscape shows opportunity for differentiation',
+          'Market timing is optimal with growing user interest'
+        ];
+      } else if (overallScore >= 5) {
+        recommendation = '⚡ Tweak needed before proceeding';
+        recommendationColor = '#d97706';
+        validationStatus = 'TWEAK';
+        reasons = [
+          'Market demand exists but needs better positioning',
+          'Competition is manageable with strategic adjustments',
+          'Requires refinement to capture market urgency'
+        ];
+      } else {
+        recommendation = '❌ Not recommended at this time';
+        recommendationColor = '#dc2626';
+        validationStatus = 'NO';
+        reasons = [
+          'Market demand is insufficient or unclear',
+          'Competition is too saturated for new entrants',
+          'Market timing may not be optimal right now'
+        ];
+      }
+      
       const validationResults = {
         ...formData,
         id: Date.now(),
         date: new Date().toISOString(),
-        score: Math.floor(Math.random() * 40) + 60, // Random score between 60-100
-        demandScore: Math.floor(Math.random() * 30) + 70,
-        competitionScore: Math.floor(Math.random() * 40) + 50,
-        urgencyScore: Math.floor(Math.random() * 35) + 55,
-        recommendation: 'Proceed with development',
+        score: overallScore,
+        demandScore: demandScore,
+        competitionScore: competitionScore,
+        urgencyScore: urgencyScore,
+        recommendation: recommendation,
+        recommendationColor: recommendationColor,
+        validationStatus: validationStatus,
+        reasons: reasons,
         insights: [
           'Strong market demand detected',
           'Moderate competition level',
