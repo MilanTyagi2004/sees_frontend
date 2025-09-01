@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Send, Loader2, CheckCircle, TrendingUp, Users, Target, ArrowRight, Info } from 'lucide-react';
 
-const ValidationForm = () => {
+const ValidationForm = ({ user }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     productName: '',
     description: '',
     category: '',
     targetAudience: '',
-    email: '',
+    email: user?.email || '',
     budget: '',
     timeline: ''
   });
@@ -65,8 +65,32 @@ const ValidationForm = () => {
       setIsLoading(false);
       setIsComplete(true);
       
+      // Generate mock validation results
+      const validationResults = {
+        ...formData,
+        id: Date.now(),
+        date: new Date().toISOString(),
+        score: Math.floor(Math.random() * 40) + 60, // Random score between 60-100
+        demandScore: Math.floor(Math.random() * 30) + 70,
+        competitionScore: Math.floor(Math.random() * 40) + 50,
+        urgencyScore: Math.floor(Math.random() * 35) + 55,
+        recommendation: 'Proceed with development',
+        insights: [
+          'Strong market demand detected',
+          'Moderate competition level',
+          'Good timing for market entry'
+        ]
+      };
+      
       // Store form data in localStorage for the report
-      localStorage.setItem('validationData', JSON.stringify(formData));
+      localStorage.setItem('validationData', JSON.stringify(validationResults));
+      
+      // Save to user's saved ideas if authenticated
+      if (user) {
+        const savedIdeas = JSON.parse(localStorage.getItem('savedIdeas') || '[]');
+        savedIdeas.push(validationResults);
+        localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
+      }
       
       // Redirect to report page after a brief delay
       setTimeout(() => {

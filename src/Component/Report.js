@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Download, Mail, ArrowLeft, TrendingUp, Users, Target, AlertTriangle, Share2, Bookmark, RefreshCw } from 'lucide-react';
+import { Download, Mail, ArrowLeft, TrendingUp, Users, Target, AlertTriangle, Share2, Bookmark, RefreshCw, Brain, Sparkles } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-const Report = () => {
+const Report = ({ data }) => {
   const navigate = useNavigate();
   const [validationData, setValidationData] = useState(null);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -12,14 +12,18 @@ const Report = () => {
   const [showComparison, setShowComparison] = useState(false);
 
   useEffect(() => {
-    const data = localStorage.getItem('validationData');
     if (data) {
-      setValidationData(JSON.parse(data));
+      setValidationData(data);
     } else {
-      // Redirect to validation form if no data
-      navigate('/validate');
+      const storedData = localStorage.getItem('validationData');
+      if (storedData) {
+        setValidationData(JSON.parse(storedData));
+      } else {
+        // Redirect to validation form if no data
+        navigate('/validate');
+      }
     }
-  }, [navigate]);
+  }, [data, navigate]);
 
   // Generate sample validation results
   const generateValidationResults = () => {
@@ -432,6 +436,19 @@ const Report = () => {
             >
               <Download size={20} />
               {isGeneratingPDF ? 'Generating PDF...' : 'Download PDF Report'}
+            </button>
+            
+            <button
+              onClick={() => {
+                // Trigger AI suggestions modal
+                const event = new CustomEvent('showAISuggestions', { detail: validationData });
+                window.dispatchEvent(event);
+              }}
+              className="action-button primary-button"
+              style={{ background: 'linear-gradient(45deg, #8b5cf6, #ec4899)' }}
+            >
+              <Brain size={20} />
+              Get AI Suggestions
             </button>
             
             <button
