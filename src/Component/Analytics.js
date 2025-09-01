@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   BarChart3, 
   TrendingUp, 
-  TrendingDown, 
   Target, 
-  Users, 
-  Clock,
   Award,
   Calendar,
-  Filter,
   Download,
-  Eye,
-  PieChart,
   Activity
 } from 'lucide-react';
 
@@ -31,9 +25,9 @@ const Analytics = ({ user }) => {
 
   useEffect(() => {
     loadAnalyticsData();
-  }, [timeRange]);
+  }, [timeRange, loadAnalyticsData]);
 
-  const loadAnalyticsData = async () => {
+  const loadAnalyticsData = useCallback(async () => {
     setLoading(true);
     
     // Simulate API call
@@ -76,7 +70,7 @@ const Analytics = ({ user }) => {
     });
     
     setLoading(false);
-  };
+  }, [timeRange]);
 
   const generateMonthlyTrend = (ideas, range) => {
     const months = [];

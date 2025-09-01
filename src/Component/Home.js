@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Target, TrendingUp, Download, Clock, Shield, Star, Users, Award, CheckCircle, ArrowRight, Sparkles, Rocket, TrendingDown, BarChart3 } from 'lucide-react';
+import { Zap, Target, TrendingUp, Download, Clock, Shield, Star, Award, CheckCircle, ArrowRight, Sparkles, Rocket } from 'lucide-react';
 
 const Home = ({ user, onLogin }) => {
   const [currentFeature, setCurrentFeature] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    setIsVisible(true);
     const interval = setInterval(() => {
       setCurrentFeature((prev) => (prev + 1) % 6);
     }, 4000);

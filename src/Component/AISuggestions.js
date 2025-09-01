@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Brain, 
-  Lightbulb, 
+ 
   TrendingUp, 
   Target, 
   Users, 

@@ -707,18 +707,31 @@ body {
 
 /* Enhanced Report Page */
 .report-container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 3rem 2rem;
 }
 
 .report-card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 25px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 30px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.report-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #10b981, #f59e0b, #8b5cf6);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
 }
 
 .report-header {
@@ -3188,5 +3201,415 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Enhanced Report Sections */
+.report-section {
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.report-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 1px solid #e2e8f0;
+}
+
+.report-section-header:hover {
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.report-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.report-section-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  animation: slideInUp 0.4s ease-out;
+}
+
+/* Customer Profile Cards */
+.customer-tier-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 2px solid;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.customer-tier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.customer-tier-card.tier-1 {
+  border-color: #10b981;
+}
+
+.customer-tier-card.tier-2 {
+  border-color: #f59e0b;
+}
+
+.customer-tier-card.tier-3 {
+  border-color: #8b5cf6;
+}
+
+.tier-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tier-badge.tier-1 {
+  background: #10b981;
+}
+
+.tier-badge.tier-2 {
+  background: #f59e0b;
+}
+
+.tier-badge.tier-3 {
+  background: #8b5cf6;
+}
+
+/* Competitor Cards */
+.competitor-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.competitor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.competitor-card:hover::before {
+  transform: scaleX(1);
+}
+
+.competitor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.market-share-badge {
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.opportunity-gap {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #0ea5e9;
+  margin-top: 1rem;
+}
+
+/* Monetization Cards */
+.monetization-model-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.monetization-model-card.recommended {
+  border: 2px solid #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.monetization-model-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-tier-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-tier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #059669);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.pricing-tier-card:hover::before {
+  transform: scaleX(1);
+}
+
+.pricing-tier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricing-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #10b981;
+  margin: 1rem 0;
+}
+
+/* Action Plan Cards */
+.action-day-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.action-day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.day-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.priority-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.priority-badge.high {
+  background: #dc2626;
+  color: white;
+}
+
+.priority-badge.medium {
+  background: #f59e0b;
+  color: white;
+}
+
+.priority-badge.low {
+  background: #10b981;
+  color: white;
+}
+
+/* Risk Assessment Cards */
+.risk-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.risk-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--risk-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.risk-card:hover::before {
+  transform: scaleX(1);
+}
+
+.risk-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.risk-level-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.risk-level-badge.high {
+  background: #dc2626;
+  color: white;
+}
+
+.risk-level-badge.medium {
+  background: #f59e0b;
+  color: white;
+}
+
+.risk-level-badge.low {
+  background: #10b981;
+  color: white;
+}
+
+.mitigation-strategy {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #0ea5e9;
+  margin-top: 1rem;
+}
+
+/* Enhanced Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design for Report */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 2rem 1rem;
+  }
+  
+  .report-card {
+    border-radius: 20px;
+  }
+  
+  .report-header {
+    padding: 2rem 1.5rem;
+  }
+  
+  .report-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .customer-tier-card,
+  .competitor-card,
+  .monetization-model-card,
+  .pricing-tier-card,
+  .action-day-card,
+  .risk-card {
+    padding: 1.5rem;
+  }
+  
+  .report-section-header {
+    padding: 0.75rem;
+  }
+  
+  .report-section-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .report-header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .report-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .customer-tier-card,
+  .competitor-card,
+  .monetization-model-card,
+  .pricing-tier-card,
+  .action-day-card,
+  .risk-card {
+    padding: 1rem;
+  }
+  
+  .pricing-amount {
+    font-size: 1.5rem;
   }
 }

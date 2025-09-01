@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  User, 
   LogOut, 
   Plus, 
   TrendingUp, 
@@ -8,13 +7,10 @@ import {
   Award, 
   Clock, 
   BarChart3,
-  FileText,
-  Download,
   Edit,
   Trash2,
   Eye,
   Calendar,
-  Star,
   Zap
 } from 'lucide-react';
 

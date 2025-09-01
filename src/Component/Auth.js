@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { User, Mail, Lock, Eye, EyeOff, LogIn, UserPlus, ArrowRight, Shield, CheckCircle, Github, Chrome, Facebook, Twitter, AlertCircle, Zap, Star, Sparkles, TrendingUp, Award, Heart, Clock, Users, Globe } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, LogIn, UserPlus, ArrowRight, Shield, CheckCircle, Github, Chrome, Facebook, AlertCircle, Zap, Star, Sparkles, TrendingUp, Award, Heart, Clock, Users, Globe } from 'lucide-react';
 
 const Auth = ({ onAuthSuccess, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,7 +15,7 @@ const Auth = ({ onAuthSuccess, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const [currentStep, setCurrentStep] = useState(1);
+
   const [socialLoading, setSocialLoading] = useState('');
   const [focusedField, setFocusedField] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -180,7 +180,7 @@ const Auth = ({ onAuthSuccess, onClose }) => {
       rememberMe: false
     });
     setErrors({});
-    setCurrentStep(1);
+
     setFormProgress(0);
   };
 
@@ -241,7 +241,37 @@ const Auth = ({ onAuthSuccess, onClose }) => {
         </div>
 
         <div className="auth-header">
-          <button className="close-btn" onClick={onClose}>
+          <button 
+            className="close-btn" 
+            onClick={onClose}
+            style={{
+              position: 'absolute',
+              top: '1rem',
+              right: '1rem',
+              background: 'rgba(255, 255, 255, 0.9)',
+              border: 'none',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.5rem',
+              color: '#374151',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+              transition: 'all 0.2s ease',
+              zIndex: 10
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'rgba(255, 255, 255, 1)';
+              e.target.style.transform = 'scale(1.1)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
             ×
           </button>
           <div className="auth-logo">
