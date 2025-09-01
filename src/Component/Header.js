@@ -4,13 +4,17 @@ import {
   Lightbulb, 
   BarChart3, 
   FileText, 
-  User, 
   LogIn, 
-  LogOut, 
-  Settings,
+  LogOut,
   TrendingUp,
   Home as HomeIcon,
-  ChevronDown
+  ChevronDown,
+  Bot,
+  Globe,
+  Users,
+  DollarSign,
+  Trophy,
+  MessageCircle
 } from 'lucide-react';
 
 const Header = ({ user, onLogin, onLogout }) => {
@@ -46,9 +50,33 @@ const Header = ({ user, onLogin, onLogout }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/analytics">
-                    <TrendingUp size={16} style={{ marginRight: '4px' }} />
-                    Analytics
+                  <Link to="/trends">
+                    <Globe size={16} style={{ marginRight: '4px' }} />
+                    Trends
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/competitors">
+                    <Users size={16} style={{ marginRight: '4px' }} />
+                    Competitors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/funding">
+                    <DollarSign size={16} style={{ marginRight: '4px' }} />
+                    Funding
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/team">
+                    <MessageCircle size={16} style={{ marginRight: '4px' }} />
+                    Team
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/gamification">
+                    <Trophy size={16} style={{ marginRight: '4px' }} />
+                    Gamification
                   </Link>
                 </li>
               </>
@@ -57,6 +85,20 @@ const Header = ({ user, onLogin, onLogout }) => {
         </nav>
         
         <div className="header-actions">
+          <button 
+            className="ai-chat-btn"
+            onClick={() => {
+              if (user) {
+                window.dispatchEvent(new CustomEvent('openAIChat'));
+              } else {
+                alert('Please log in to use the AI Assistant');
+                onLogin();
+              }
+            }}
+          >
+            <Bot size={16} />
+            AI Assistant
+          </button>
           {user ? (
             <div className="user-menu">
               <button 

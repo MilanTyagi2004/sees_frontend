@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+import './Component/NewFeatures.css';
 import Header from './Component/Header';
 import Home from './Component/Home';
 import ValidationForm from './Component/ValidationForm';
@@ -10,12 +11,19 @@ import Auth from './Component/Auth';
 import Dashboard from './Component/Dashboard';
 import Analytics from './Component/Analytics';
 import AISuggestions from './Component/AISuggestions';
+import AIChat from './Component/AIChat';
+import TrendsDashboard from './Component/TrendsDashboard';
+import CompetitorTracking from './Component/CompetitorTracking';
+import FundingCalculator from './Component/FundingCalculator';
+import TeamCollaboration from './Component/TeamCollaboration';
+import Gamification from './Component/Gamification';
 
 function App() {
   const [user, setUser] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [currentReport, setCurrentReport] = useState(null);
   const [showAISuggestions, setShowAISuggestions] = useState(false);
+  const [showAIChat, setShowAIChat] = useState(false);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -32,10 +40,17 @@ function App() {
       setShowAISuggestions(true);
     };
 
+    // Listen for AI chat event
+    const handleAIChat = () => {
+      setShowAIChat(true);
+    };
+
     window.addEventListener('showAISuggestions', handleAISuggestions);
+    window.addEventListener('openAIChat', handleAIChat);
     
     return () => {
       window.removeEventListener('showAISuggestions', handleAISuggestions);
+      window.removeEventListener('openAIChat', handleAIChat);
     };
   }, []);
 
@@ -75,6 +90,8 @@ function App() {
           onLogin={() => setShowAuth(true)}
           onLogout={handleLogout}
         />
+        
+
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home user={user} onLogin={() => setShowAuth(true)} />} />
@@ -90,6 +107,21 @@ function App() {
             } />
             <Route path="/analytics" element={
               user ? <Analytics user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
+            } />
+            <Route path="/trends" element={
+              user ? <TrendsDashboard user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
+            } />
+            <Route path="/competitors" element={
+              user ? <CompetitorTracking user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
+            } />
+            <Route path="/funding" element={
+              user ? <FundingCalculator user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
+            } />
+            <Route path="/team" element={
+              user ? <TeamCollaboration user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
+            } />
+            <Route path="/gamification" element={
+              user ? <Gamification user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
             } />
           </Routes>
         </main>
@@ -119,6 +151,15 @@ function App() {
               />
             </div>
           </div>
+        )}
+        
+        {/* AI Chat Assistant */}
+        {showAIChat && (
+          <AIChat 
+            isOpen={showAIChat}
+            onClose={() => setShowAIChat(false)}
+            validationData={currentReport}
+          />
         )}
       </div>
     </Router>

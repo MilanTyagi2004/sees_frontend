@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Mail, Twitter, Linkedin, Github, ArrowRight, Star, Users, TrendingUp, Shield, Heart, Globe, Zap } from 'lucide-react';
+import { Lightbulb, Mail, Twitter, Linkedin, Github, ArrowRight, Users, TrendingUp, Shield, Heart, Globe, Zap } from 'lucide-react';
 
 const Footer = () => {
   return (
