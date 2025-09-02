@@ -2905,25 +2905,26 @@
 
 /* ===== Design Tokens & Theme ===== */
 :root {
-  --bg: #0b1020;
-  --bg-elev-1: #10162b;
-  --bg-elev-2: #141c35;
-  --card-glass: rgba(255,255,255,0.06);
-  --card-border: rgba(255,255,255,0.12);
-  --text: #e6e9f2;
-  --text-dim: #bfcbe3;
-  --primary: #7c8cff;
-  --primary-600: #667eea;
-  --primary-700: #5a67d8;
-  --success: #22d3a3;
+  /* Light defaults */
+  --bg: #ffffff;
+  --bg-elev-1: #ffffff;
+  --bg-elev-2: #f7f9fd;
+  --card-glass: rgba(255,255,255,0.7);
+  --card-border: rgba(17,24,39,0.08);
+  --text: #111827;
+  --text-dim: #6b7280;
+  --primary: #6366f1;
+  --primary-600: #6366f1;
+  --primary-700: #4f46e5;
+  --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
   --info: #06b6d4;
   --accent-1: #8b5cf6;
   --accent-2: #f472b6;
-  --shadow-1: 0 8px 30px rgba(0,0,0,.25);
-  --shadow-2: 0 16px 50px rgba(0,0,0,.35);
-  --glass-blur: saturate(180%) blur(14px);
+  --shadow-1: 0 8px 24px rgba(2,6,23,.08);
+  --shadow-2: 0 20px 50px rgba(2,6,23,.12);
+  --glass-blur: saturate(160%) blur(10px);
 }
 
 .theme-light {

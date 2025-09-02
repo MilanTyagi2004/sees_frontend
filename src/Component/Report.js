@@ -96,7 +96,7 @@ const Report = ({ data }) => {
       reasons,
       insights: {
         demand: [
-          `Strong interest in ${category.toLowerCase()} solutions`,
+          `Strong interest in ${(category || '').toLowerCase()} solutions`,
           'Growing search trends for related keywords',
           'Active discussions in relevant online communities'
         ],

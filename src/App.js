@@ -24,7 +24,6 @@ function App() {
   const [currentReport, setCurrentReport] = useState(null);
   const [showAISuggestions, setShowAISuggestions] = useState(false);
   const [showAIChat, setShowAIChat] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [showCmdk, setShowCmdk] = useState(false);
   const [cmdkQuery, setCmdkQuery] = useState('');
 
@@ -57,11 +56,7 @@ function App() {
     };
   }, []);
 
-  // Apply theme to document
-  useEffect(() => {
-    document.body.classList.toggle('theme-light', theme === 'light');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  // Theme removed
 
   // Command palette keybinding
   useEffect(() => {
@@ -91,7 +86,6 @@ function App() {
       { label: 'Go: Funding Calculator', path: '/funding' },
       { label: 'Go: Team Collaboration', path: '/team' },
       { label: 'Go: Gamification', path: '/gamification' },
-      { label: 'Action: Toggle Theme', action: () => setTheme((t) => (t === 'dark' ? 'light' : 'dark')) },
       { label: 'Action: Open AI Assistant', action: () => setShowAIChat(true) }
     ];
     const query = (cmdkQuery || '').toLowerCase();
@@ -134,7 +128,6 @@ function App() {
           user={user} 
           onLogin={() => setShowAuth(true)}
           onLogout={handleLogout}
-          onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
         />
         
 

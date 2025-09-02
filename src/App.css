@@ -721,6 +721,7 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
+  color: #111827;
 }
 
 .report-card::before {
@@ -795,6 +796,23 @@ body {
 
 .report-content {
   padding: 3rem;
+  color: #111827;
+}
+
+/* Keep report body text stable regardless of theme */
+.report-content h1,
+.report-content h2,
+.report-content h3,
+.report-content h4,
+.report-content h5,
+.report-content h6,
+.report-content p,
+.report-content li,
+.report-content div,
+.report-content span,
+.report-content strong,
+.report-content label {
+  color: #111827;
 }
 
 .metric-grid {
