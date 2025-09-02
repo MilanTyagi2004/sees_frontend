@@ -7,7 +7,6 @@ import {
   Users, 
   Calendar, 
   Target, 
-  PieChart, 
   Download, 
   Share2, 
   Lightbulb, 
@@ -16,24 +15,12 @@ import {
   BarChart3,
   LineChart,
   Activity,
-  Zap,
-  Rocket,
-  Star,
-  Award,
-  Clock,
-  Eye,
   Settings,
   RefreshCw,
   Save,
   Play,
-  Pause,
-  SkipForward,
   ArrowUpRight,
   ArrowDownRight,
-  Filter,
-  Search,
-  Bell,
-  BookOpen,
   Globe,
   Shield,
   Heart,
@@ -607,7 +594,7 @@ const FundingCalculator = () => {
                     <h3>Funding Analysis</h3>
                     <div className="attractiveness-score">
                       <span className="score-label">Investor Attractiveness</span>
-                      <div className="score-circle" style={{ 
+                      <div className="mini-score-circle" style={{ 
                         background: `conic-gradient(#10b981 ${results.attractivenessScore * 3.6}deg, #e5e7eb 0deg)` 
                       }}>
                         <span>{results.attractivenessScore}</span>

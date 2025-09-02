@@ -98,7 +98,7 @@ const Home = ({ user, onLogin }) => {
             </Link>
             <div className="hero-stats">
               <div className="stat-mini">
-                <span className="stat-number">2.5min</span>
+                <span className="stat-number">1 min</span>
                 <span className="stat-label">Average Time</span>
               </div>
               <div className="stat-mini">

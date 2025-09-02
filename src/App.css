@@ -1290,9 +1290,9 @@ body {
 .stat-number {
   font-size: 3rem;
   font-weight: 900;
-  color: #667eea;
+  color: #1e37a2;
   margin-bottom: 0.5rem;
-  background: linear-gradient(45deg, #667eea, #764ba2);
+  background: linear-gradient(45deg, #2d4097, #764ba2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
