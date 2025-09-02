@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import './Component/NewFeatures.css';
@@ -24,6 +24,9 @@ function App() {
   const [currentReport, setCurrentReport] = useState(null);
   const [showAISuggestions, setShowAISuggestions] = useState(false);
   const [showAIChat, setShowAIChat] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const [showCmdk, setShowCmdk] = useState(false);
+  const [cmdkQuery, setCmdkQuery] = useState('');
 
   useEffect(() => {
     // Check if user is already logged in
@@ -53,6 +56,47 @@ function App() {
       window.removeEventListener('openAIChat', handleAIChat);
     };
   }, []);
+
+  // Apply theme to document
+  useEffect(() => {
+    document.body.classList.toggle('theme-light', theme === 'light');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  // Command palette keybinding
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      const key = typeof e.key === 'string' ? e.key.toLowerCase() : '';
+      const isK = key === 'k';
+      const meta = e.ctrlKey || e.metaKey;
+      if (meta && isK) {
+        e.preventDefault();
+        setShowCmdk((v) => !v);
+      }
+      if (e.key === 'Escape') {
+        setShowCmdk(false);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  const paletteItems = useMemo(() => {
+    const items = [
+      { label: 'Go: Home', path: '/' },
+      { label: 'Go: Dashboard', path: '/dashboard' },
+      { label: 'Go: Validate Idea', path: '/validate' },
+      { label: 'Go: Trends', path: '/trends' },
+      { label: 'Go: Competitors', path: '/competitors' },
+      { label: 'Go: Funding Calculator', path: '/funding' },
+      { label: 'Go: Team Collaboration', path: '/team' },
+      { label: 'Go: Gamification', path: '/gamification' },
+      { label: 'Action: Toggle Theme', action: () => setTheme((t) => (t === 'dark' ? 'light' : 'dark')) },
+      { label: 'Action: Open AI Assistant', action: () => setShowAIChat(true) }
+    ];
+    const query = (cmdkQuery || '').toLowerCase();
+    return items.filter((it) => (it.label || '').toLowerCase().includes(query));
+  }, [cmdkQuery]);
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
@@ -85,10 +129,12 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <div className="noise-overlay"></div>
         <Header 
           user={user} 
           onLogin={() => setShowAuth(true)}
           onLogout={handleLogout}
+          onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
         />
         
 
@@ -160,6 +206,42 @@ function App() {
             onClose={() => setShowAIChat(false)}
             validationData={currentReport}
           />
+        )}
+
+        {/* Command Palette */}
+        {showCmdk && (
+          <div className="cmdk-overlay" onClick={() => setShowCmdk(false)}>
+            <div className="cmdk" onClick={(e) => e.stopPropagation()}>
+              <div className="cmdk-header">
+                <input 
+                  className="cmdk-input" 
+                  placeholder="Type a command or search (Ctrl/Cmd+K)" 
+                  value={cmdkQuery}
+                  onChange={(e) => setCmdkQuery(e.target.value)}
+                  autoFocus
+                />
+              </div>
+              <div className="cmdk-list">
+                {paletteItems.map((item, idx) => (
+                  <button 
+                    key={idx} 
+                    className="cmdk-item"
+                    onClick={() => {
+                      setShowCmdk(false);
+                      if (item.path) window.location.href = item.path;
+                      if (item.action) item.action();
+                    }}
+                  >
+                    <span>{item.label}</span>
+                    <span className="cmdk-hint">Enter</span>
+                  </button>
+                ))}
+                {paletteItems.length === 0 && (
+                  <div className="cmdk-item" style={{ opacity: .7 }}>No results</div>
+                )}
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </Router>
