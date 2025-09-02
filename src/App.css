@@ -2992,6 +2992,7 @@ body {
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  
 }
 
 .header-content {
@@ -3021,9 +3022,13 @@ body {
 .nav-links {
   display: flex;
   list-style: none;
-  margin: 0;
+  margin-right: 14px;
+  margin-left: 06px;
   padding: 0;
-  gap: 2rem;
+  gap: 1rem;
+  display: flex;
+  align-items: center;   /* vertically center items */
+  justify-content: space-between;
 }
 
 .nav-links a {
@@ -3082,7 +3087,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 25px;
   backdrop-filter: blur(10px);
   font-weight: 600;
@@ -3825,6 +3830,17 @@ body {
   }
 }
 
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: 14px;
+  }
+}
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
@@ -3862,7 +3878,7 @@ body {
   }
   
   .user-button {
-    padding: 0.5rem;
+    padding: 0.2rem;
   }
   
   .user-avatar {
