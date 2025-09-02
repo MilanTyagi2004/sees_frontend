@@ -407,7 +407,7 @@ const Report = ({ data }) => {
           <h1>{validationData.productName}</h1>
           <p>SES Idea Validation Report</p>
           <div className="score-circle">
-            {results.overallScore}/10
+            <span>{results.overallScore}/10</span>
           </div>
           <p>Overall Score</p>
           
