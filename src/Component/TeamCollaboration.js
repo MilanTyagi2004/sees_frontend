@@ -64,6 +64,8 @@ const TeamCollaboration = () => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [teamStats, setTeamStats] = useState({});
+  const [typingUserIds, setTypingUserIds] = useState([]);
+  const [reactionsByDiscussion, setReactionsByDiscussion] = useState({});
 
   useEffect(() => {
     loadTeamData();
@@ -217,6 +219,9 @@ const TeamCollaboration = () => {
         priority: 'medium'
       }
     ]);
+
+    // Seed reactions state
+    setReactionsByDiscussion({ 1: { '👍': 3, '🔥': 1 }, 2: { '👍': 1 } });
   };
 
   const handleInviteMember = () => {
@@ -290,6 +295,22 @@ const TeamCollaboration = () => {
       case 'paused': return '#6b7280';
       default: return '#6b7280';
     }
+  };
+
+  const toggleTyping = (memberId, isTyping) => {
+    setTypingUserIds(prev => {
+      const set = new Set(prev);
+      if (isTyping) set.add(memberId); else set.delete(memberId);
+      return Array.from(set);
+    });
+  };
+
+  const addReaction = (discussionId, emoji) => {
+    setReactionsByDiscussion(prev => {
+      const current = prev[discussionId] || {};
+      const next = { ...current, [emoji]: (current[emoji] || 0) + 1 };
+      return { ...prev, [discussionId]: next };
+    });
   };
 
   const tabs = [
@@ -447,6 +468,14 @@ const TeamCollaboration = () => {
                       <span className="activity-time">
                         {member.lastActive.toLocaleTimeString()}
                       </span>
+                      {typingUserIds.includes(member.id) && (
+                        <span className="typing" style={{ marginLeft: '6px' }}>
+                          <span>typing</span>
+                          <span className="dot"></span>
+                          <span className="dot"></span>
+                          <span className="dot"></span>
+                        </span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -694,6 +723,19 @@ const TeamCollaboration = () => {
                       <span className="last-reply">
                         Last reply: {discussion.lastReply.toLocaleString()}
                       </span>
+                    </div>
+                    <div className="reactions" style={{ marginTop: '.5rem' }}>
+                      {Object.entries(reactionsByDiscussion[discussion.id] || {}).map(([emoji, count]) => (
+                        <button key={emoji} className="reaction" onClick={() => addReaction(discussion.id, emoji)}>
+                          <span>{emoji}</span>
+                          <span className="count">{count}</span>
+                        </button>
+                      ))}
+                      {['👍','🔥','🎯','💡'].map(emoji => (
+                        <button key={emoji} className="reaction" onClick={() => addReaction(discussion.id, emoji)}>
+                          <span>{emoji}</span>
+                        </button>
+                      ))}
                     </div>
                   </div>
                   <div className="discussion-actions">

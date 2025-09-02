@@ -31,6 +31,25 @@ import {
 } from 'lucide-react';
 
 const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
+  const CountUp = ({ value, duration = 700 }) => {
+    const [display, setDisplay] = useState(0);
+    useEffect(() => {
+      let raf;
+      const start = performance.now();
+      const from = 0;
+      const to = Number(value) || 0;
+      const animate = (now) => {
+        const elapsed = now - start;
+        const t = Math.min(1, elapsed / duration);
+        const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // easeInOutQuad
+        setDisplay(Math.round(from + (to - from) * eased));
+        if (t < 1) raf = requestAnimationFrame(animate);
+      };
+      raf = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(raf);
+    }, [value, duration]);
+    return <>{display}</>;
+  };
   const [savedIdeas, setSavedIdeas] = useState([]);
   const [stats, setStats] = useState({
     totalValidations: 0,
@@ -176,10 +195,76 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
   if (isLoading) {
     return (
       <div className="dashboard">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading your dashboard...</p>
+        <div className="dashboard-header sticky-header">
+          <div className="user-info">
+            <div className="user-avatar skeleton-avatar skeleton"></div>
+            <div className="user-details">
+              <div className="skeleton-text lg skeleton" style={{ width: '200px' }}></div>
+              <div className="skeleton-text sm skeleton" style={{ width: '260px', marginTop: '8px' }}></div>
+            </div>
+          </div>
+          <div className="dashboard-actions">
+            <div className="timeframe-selector">
+              <div className="skeleton-text skeleton" style={{ width: '140px', height: '36px', borderRadius: '8px' }}></div>
+            </div>
+            <div className="skeleton-text skeleton" style={{ width: '140px', height: '40px', borderRadius: '8px' }}></div>
+            <div className="skeleton-text skeleton" style={{ width: '120px', height: '40px', borderRadius: '8px' }}></div>
+          </div>
         </div>
+
+        <div className="stats-grid">
+          {[1,2,3,4].map(i => (
+            <div key={i} className="stat-card glass-card skeleton-card">
+              <div className="skeleton-text lg" style={{ width: '40%' }}></div>
+              <div className="skeleton-text" style={{ width: '70%', marginTop: '12px' }}></div>
+              <div className="skeleton-bar" style={{ marginTop: '16px' }}></div>
+            </div>
+          ))}
+        </div>
+
+        <div className="dashboard-content">
+          <div className="content-left">
+            <div className="activity-section skeleton-card">
+              <div className="section-header">
+                <div className="skeleton-text" style={{ width: '160px' }}></div>
+                <div className="skeleton-text" style={{ width: '80px' }}></div>
+              </div>
+              {[...Array(4)].map((_, idx) => (
+                <div key={idx} className="activity-item">
+                  <div className="skeleton-avatar"></div>
+                  <div style={{ flex: 1 }}>
+                    <div className="skeleton-text" style={{ width: '60%' }}></div>
+                    <div className="skeleton-text sm" style={{ width: '40%', marginTop: '8px' }}></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="top-ideas-section skeleton-card">
+              <div className="section-header">
+                <div className="skeleton-text" style={{ width: '180px' }}></div>
+                <div className="skeleton-text" style={{ width: '24px', height: '24px', borderRadius: '6px' }}></div>
+              </div>
+              {[...Array(3)].map((_, idx) => (
+                <div key={idx} className="top-idea-item">
+                  <div className="skeleton-text" style={{ width: '32px', height: '32px', borderRadius: '8px' }}></div>
+                  <div style={{ flex: 1 }}>
+                    <div className="skeleton-text" style={{ width: '50%' }}></div>
+                    <div className="skeleton-text sm" style={{ width: '30%', marginTop: '8px' }}></div>
+                  </div>
+                  <div className="skeleton-text" style={{ width: '36px', height: '32px', borderRadius: '6px' }}></div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="content-right">
+            <div className="trends-section skeleton-card" style={{ height: '300px' }}></div>
+            <div className="quick-actions-section skeleton-card" style={{ height: '160px' }}></div>
+            <div className="team-overview-section skeleton-card" style={{ height: '200px' }}></div>
+          </div>
+        </div>
+
+        <div className="ideas-section skeleton-card" style={{ minHeight: '200px' }}></div>
       </div>
     );
   }
@@ -187,7 +272,7 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
   return (
     <div className="dashboard">
       {/* Enhanced Header */}
-      <div className="dashboard-header">
+      <div className="dashboard-header sticky-header">
         <div className="user-info">
           <div className="user-avatar">
             <img src={user.avatar} alt={user.name} />
@@ -214,6 +299,7 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
               value={selectedTimeframe} 
               onChange={(e) => setSelectedTimeframe(e.target.value)}
               className="timeframe-select"
+              aria-label="Select timeframe"
             >
               <option value="30d">Last 30 days</option>
               <option value="90d">Last 90 days</option>
@@ -223,10 +309,6 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
           <button className="btn-primary" onClick={onNewValidation}>
             <Plus size={20} />
             New Validation
-          </button>
-          <button className="btn-secondary" onClick={onLogout}>
-            <LogOut size={20} />
-            Logout
           </button>
         </div>
       </div>
@@ -238,11 +320,16 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
             <Target size={24} />
           </div>
           <div className="stat-content">
-            <h3>{stats.totalValidations}</h3>
+            <h3><CountUp value={stats.totalValidations} /></h3>
             <p>Total Validations</p>
             <div className="stat-trend positive">
               <ArrowUpRight size={16} />
               +{stats.thisMonth} this month
+            </div>
+            <div className="mini-spark">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none" className="spark-svg">
+                <polyline fill="none" vectorEffect="non-scaling-stroke" points="0,18 12,14 24,16 36,10 48,12 60,8 72,9 84,6 96,4" />
+              </svg>
             </div>
           </div>
         </div>
@@ -252,11 +339,16 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
             <TrendingUp size={24} />
           </div>
           <div className="stat-content">
-            <h3>{stats.successRate}%</h3>
+            <h3><CountUp value={stats.successRate} />%</h3>
             <p>Success Rate</p>
             <div className="stat-trend positive">
               <ArrowUpRight size={16} />
               +5% from last month
+            </div>
+            <div className="mini-spark">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none" className="spark-svg">
+                <polyline fill="none" vectorEffect="non-scaling-stroke" points="0,20 12,18 24,16 36,14 48,12 60,10 72,9 84,8 96,6" />
+              </svg>
             </div>
           </div>
         </div>
@@ -266,11 +358,16 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
             <Award size={24} />
           </div>
           <div className="stat-content">
-            <h3>{stats.avgScore}</h3>
+            <h3><CountUp value={stats.avgScore} /></h3>
             <p>Average Score</p>
             <div className="stat-trend positive">
               <ArrowUpRight size={16} />
               +3 points
+            </div>
+            <div className="mini-spark">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none" className="spark-svg">
+                <polyline fill="none" vectorEffect="non-scaling-stroke" points="0,14 12,12 24,10 36,12 48,11 60,9 72,8 84,10 96,9" />
+              </svg>
             </div>
           </div>
         </div>
@@ -286,8 +383,18 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
               <ArrowUpRight size={16} />
               +12% growth
             </div>
+            <div className="mini-spark">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none" className="spark-svg">
+                <polyline fill="none" vectorEffect="non-scaling-stroke" points="0,22 12,19 24,20 36,16 48,14 60,15 72,12 84,10 96,8" />
+              </svg>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Filters */}
+      <div className="sticky-filters" role="region" aria-label="Applied filters">
+        <span className="applied-chip">Time: {selectedTimeframe} <button className="remove" aria-label="Clear timeframe filter" onClick={() => setSelectedTimeframe('30d')}>×</button></span>
       </div>
 
       {/* Main Content Grid */}
@@ -359,28 +466,28 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
               <h3>Monthly Trends</h3>
               <div className="trend-controls">
                 <button className="trend-btn active">Validations</button>
-                <button className="trend-btn">Revenue</button>
-                <button className="trend-btn">Scores</button>
               </div>
             </div>
-            <div className="trends-chart">
-              <div className="chart-bars">
-                {monthlyTrends.map((trend, index) => (
-                  <div key={index} className="chart-bar">
-                    <div className="bar-tooltip">
-                      <strong>{trend.validations}</strong> validations
-                      <br />
-                      Avg: {trend.avgScore}/100
-                    </div>
-                    <div 
-                      className="bar-fill" 
-                      style={{ 
-                        height: `${(trend.validations / Math.max(...monthlyTrends.map(t => t.validations))) * 100}%`,
-                        backgroundColor: getProgressColor(trend.avgScore)
-                      }}
-                    ></div>
-                    <span className="bar-label">{trend.month}</span>
-                  </div>
+            <div className="trends-chart line-chart">
+              {monthlyTrends.length > 0 && (() => {
+                const maxVal = Math.max(1, ...monthlyTrends.map(t => t.validations));
+                const stepX = monthlyTrends.length > 1 ? 100 / (monthlyTrends.length - 1) : 100;
+                const points = monthlyTrends.map((t, i) => `${i * stepX},${100 - (t.validations / maxVal) * 100}`).join(' ');
+                return (
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="line-svg">
+                    <polyline points={points} />
+                    <defs>
+                      <linearGradient id="trendGradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="var(--primary)" stopOpacity=".8" />
+                        <stop offset="100%" stopColor="var(--primary)" stopOpacity=".15" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                );
+              })()}
+              <div className="line-labels">
+                {monthlyTrends.map((t, i) => (
+                  <span key={i} className="bar-label">{t.month}</span>
                 ))}
               </div>
             </div>

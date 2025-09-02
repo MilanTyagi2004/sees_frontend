@@ -25,7 +25,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 
-const Header = ({ user, onLogin, onLogout }) => {
+const Header = ({ user, onLogin, onLogout, onToggleTheme }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showFeaturesMenu, setShowFeaturesMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -147,6 +147,10 @@ const Header = ({ user, onLogin, onLogout }) => {
         </button>
         
         <div className="header-actions">
+          {/* Theme Toggle */}
+          <button className="theme-toggle" title="Toggle theme" onClick={onToggleTheme}>
+            🌓
+          </button>
           {/* AI Chat Button */}
           <button 
             className="ai-chat-btn"
