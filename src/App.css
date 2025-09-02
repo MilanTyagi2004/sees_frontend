@@ -145,7 +145,7 @@ body {
   display: flex;
   gap: 2rem;
   list-style: none;
-  margin: 0;
+  margin-right: auto;
   padding: 0;
 }
 
@@ -3001,7 +3001,7 @@ body {
   padding: 0 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .logo {
@@ -3022,13 +3022,13 @@ body {
 .nav-links {
   display: flex;
   list-style: none;
-  margin-right: 14px;
-  margin-left: 06px;
+  margin-left: 15px;
   padding: 0;
   gap: 1rem;
   display: flex;
   align-items: center;   /* vertically center items */
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-right: auto;
 }
 
 .nav-links a {
@@ -3052,6 +3052,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-left: auto;
 }
 
 /* Login Button Styles */
@@ -3829,6 +3830,7 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
 
 @media (max-width: 1024px) {
   .desktop-nav {
