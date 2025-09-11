@@ -435,7 +435,6 @@ const ValidationForm = ({ user }) => {
               >
                 {isLoading ? (
                   <>
-                    <Loader2 size={20} className="spinner" style={{ marginRight: '8px' }} />
                     Analyzing Your Idea...
                   </>
                 ) : (

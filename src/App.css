@@ -665,9 +665,9 @@ body {
   transition: left 0.4s ease;
 }
 
-.submit-button:hover::before {
+/* .submit-button:hover::before {
   left: 0;
-}
+} */
 
 .submit-button:hover {
   transform: translateY(-3px);
@@ -929,8 +929,16 @@ body {
 }
 
 .secondary-button {
-  background: linear-gradient(45deg, #6b7280, #4b5563);
   color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .secondary-button:hover {
@@ -978,11 +986,7 @@ body {
 }
 
 .progress-bar {
-  height: 100%;
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  border-radius: 10px;
   transition: width 0.5s ease;
-  position: relative;
 }
 
 .progress-bar::after {
@@ -2104,14 +2108,8 @@ body {
 }
 
 .progress-bar {
-  width: 100%;
-  height: 8px;
-  background: linear-gradient(90deg, #e5e7eb, #f3f4f6);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
   position: relative;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px #000000;
 }
 
 .progress-fill {
@@ -2292,7 +2290,6 @@ body {
   color: #374151;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
@@ -2365,18 +2362,21 @@ body {
 }
 
 .form-input {
-  width: 100%;
-  padding: 1.25rem 1rem 0.75rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  font-size: 1rem;
   background: white;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-sizing: border-box;
   box-shadow: 
     0 4px 15px rgba(0, 0, 0, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transform: translateZ(0);
+}
+
+.form-input:-webkit-autofill {
+  -webkit-box-shadow: 
+    0 0 0px 1000px white inset, /* overwrite yellow autofill bg */
+    0 4px 15px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-text-fill-color: #000 !important; /* keep text readable */
+  transition: background-color 5000s ease-in-out 0s !important;
 }
 
 .form-input:focus {
@@ -2445,8 +2445,7 @@ body {
 .password-toggle {
   position: absolute;
   right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 06%;
   background: none;
   border: none;
   color: #9ca3af;
@@ -2460,7 +2459,6 @@ body {
 .password-toggle:hover {
   color: #667eea;
   background: rgba(102, 126, 234, 0.1);
-  transform: translateY(-50%) translateZ(20px) scale(1.1);
 }
 
 /* Enhanced Password Strength with 3D */

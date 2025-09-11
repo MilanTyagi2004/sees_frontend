@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Mail, Twitter, Linkedin, Github, ArrowRight, Users, TrendingUp, Shield, Heart, Globe, Zap } from 'lucide-react';
+import { Lightbulb, Mail, Twitter, Linkedin, ArrowRight, Users, TrendingUp, Shield, Heart, Globe, Zap } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -279,7 +279,7 @@ const Footer = () => {
             <Twitter size={20} />
           </a>
           <a 
-            href="https://linkedin.com/company/ses" 
+            href="https://www.linkedin.com/in/yash-tyagi-089a49345/" 
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ 
@@ -309,37 +309,7 @@ const Footer = () => {
           >
             <Linkedin size={20} />
           </a>
-          <a 
-            href="https://github.com/ses" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            style={{ 
-              color: 'white', 
-              opacity: 0.8,
-              padding: '0.75rem',
-              borderRadius: '12px',
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.opacity = '1';
-              e.target.style.background = 'rgba(36, 41, 46, 0.2)';
-              e.target.style.borderColor = 'rgba(36, 41, 46, 0.3)';
-              e.target.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.opacity = '0.8';
-              e.target.style.background = 'rgba(255,255,255,0.05)';
-              e.target.style.borderColor = 'rgba(255,255,255,0.1)';
-              e.target.style.transform = 'translateY(0)';
-            }}
-          >
-            <Github size={20} />
-          </a>
+          
         </div>
         
         {/* Bottom Bar */}

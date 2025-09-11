@@ -450,6 +450,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <DollarSign size={16} />
                     <input
+                      className='form-input'
                       type="number"
                       value={inputs.monthlyRevenue}
                       onChange={(e) => handleInputChange('monthlyRevenue', e.target.value)}
@@ -463,6 +464,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <DollarSign size={16} />
                     <input
+                      className='form-input'
                       type="number"
                       value={inputs.monthlyExpenses}
                       onChange={(e) => handleInputChange('monthlyExpenses', e.target.value)}
@@ -476,6 +478,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <Users size={16} />
                     <input
+                    className='form-input'
                       type="number"
                       value={inputs.teamSize}
                       onChange={(e) => handleInputChange('teamSize', e.target.value)}
@@ -489,6 +492,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <Calendar size={16} />
                     <input
+                    className='form-input'
                       type="number"
                       value={inputs.runway}
                       onChange={(e) => handleInputChange('runway', e.target.value)}
@@ -502,6 +506,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <TrendingUp size={16} />
                     <input
+                      className='form-input'
                       type="number"
                       value={inputs.growthRate}
                       onChange={(e) => handleInputChange('growthRate', e.target.value)}
@@ -515,6 +520,7 @@ const FundingCalculator = () => {
                   <div className="input-container">
                     <Target size={16} />
                     <input
+                      className='form-input'
                       type="number"
                       value={inputs.targetValuation}
                       onChange={(e) => handleInputChange('targetValuation', e.target.value)}
@@ -530,6 +536,7 @@ const FundingCalculator = () => {
                       <div className="input-container">
                         <Heart size={16} />
                         <input
+                        className='form-input'
                           type="number"
                           value={inputs.customerLifetimeValue}
                           onChange={(e) => handleInputChange('customerLifetimeValue', e.target.value)}
@@ -543,6 +550,7 @@ const FundingCalculator = () => {
                       <div className="input-container">
                         <Target size={16} />
                         <input
+                        className='form-input'
                           type="number"
                           value={inputs.customerAcquisitionCost}
                           onChange={(e) => handleInputChange('customerAcquisitionCost', e.target.value)}
@@ -556,6 +564,7 @@ const FundingCalculator = () => {
                       <div className="input-container">
                         <TrendingDown size={16} />
                         <input
+                        className='form-input'
                           type="number"
                           value={inputs.churnRate}
                           onChange={(e) => handleInputChange('churnRate', e.target.value)}
@@ -569,6 +578,7 @@ const FundingCalculator = () => {
                       <div className="input-container">
                         <Globe size={16} />
                         <input
+                        className='form-input'
                           type="number"
                           value={inputs.marketSize}
                           onChange={(e) => handleInputChange('marketSize', e.target.value)}

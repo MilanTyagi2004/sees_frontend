@@ -314,6 +314,7 @@ const Dashboard = ({ user, onLogout, onNewValidation, onViewReport }) => {
       </div>
 
       {/* Enhanced Stats Grid */}
+      
       <div className="stats-grid">
         <div className="stat-card primary">
           <div className="stat-icon">

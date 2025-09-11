@@ -229,17 +229,6 @@ const Auth = ({ onAuthSuccess, onClose }) => {
           </div>
         )}
 
-        {/* Progress Bar */}
-        <div className="form-progress">
-          <div className="progress-bar">
-            <div 
-              className="progress-fill" 
-              style={{ width: `${formProgress}%` }}
-            ></div>
-          </div>
-          <span className="progress-text">{Math.round(formProgress)}% Complete</span>
-        </div>
-
         <div className="auth-header">
           <button 
             className="close-btn" 
@@ -363,12 +352,8 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                   onFocus={() => handleInputFocus('name')}
                   onBlur={handleInputBlur}
                   className={`form-input ${errors.name ? 'error' : ''} ${focusedField === 'name' || formData.name ? 'focused' : ''}`}
-                  placeholder=" "
+                  placeholder="Full Name"
                 />
-                <label className={`floating-label-text ${focusedField === 'name' || formData.name ? 'active' : ''}`}>
-                  <User size={18} />
-                  Full Name
-                </label>
               </div>
               {errors.name && (
                 <span className="error-message">
@@ -389,12 +374,9 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                 onFocus={() => handleInputFocus('email')}
                 onBlur={handleInputBlur}
                 className={`form-input ${errors.email ? 'error' : ''} ${focusedField === 'email' || formData.email ? 'focused' : ''}`}
-                placeholder=" "
+                placeholder="Email Address"
               />
-              <label className={`floating-label-text ${focusedField === 'email' || formData.email ? 'active' : ''}`}>
-                <Mail size={18} />
-                Email Address
-              </label>
+
             </div>
             {errors.email && (
               <span className="error-message">
@@ -415,7 +397,7 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                   onFocus={() => handleInputFocus('password')}
                   onBlur={handleInputBlur}
                   className={`form-input ${errors.password ? 'error' : ''} ${focusedField === 'password' || formData.password ? 'focused' : ''}`}
-                  placeholder=" "
+                  placeholder="Password"
                 />
                 <button
                   type="button"
@@ -425,10 +407,6 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              <label className={`floating-label-text ${focusedField === 'password' || formData.password ? 'active' : ''}`}>
-                <Lock size={18} />
-                Password
-              </label>
             </div>
             
             {/* Enhanced Password Strength Indicator */}
@@ -496,7 +474,7 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                     onFocus={() => handleInputFocus('confirmPassword')}
                     onBlur={handleInputBlur}
                     className={`form-input ${errors.confirmPassword ? 'error' : ''} ${focusedField === 'confirmPassword' || formData.confirmPassword ? 'focused' : ''}`}
-                    placeholder=" "
+                    placeholder="Confirm Password"
                   />
                   <button
                     type="button"
@@ -506,10 +484,6 @@ const Auth = ({ onAuthSuccess, onClose }) => {
                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                <label className={`floating-label-text ${focusedField === 'confirmPassword' || formData.confirmPassword ? 'active' : ''}`}>
-                  <Lock size={18} />
-                  Confirm Password
-                </label>
               </div>
               {errors.confirmPassword && (
                 <span className="error-message">
