@@ -13,11 +13,9 @@ import {
   Globe,
   Users,
   DollarSign,
-  Trophy,
   MessageCircle,
   Settings,
   User,
-  Bell,
   Menu,
   X,
   Zap,
@@ -66,7 +64,6 @@ const Header = ({ user, onLogin, onLogout }) => {
     { name: 'Competitors', icon: Users, path: '/competitors', description: 'Track your competition' },
     { name: 'Funding Calculator', icon: DollarSign, path: '/funding', description: 'Calculate funding needs' },
     { name: 'Team Collab', icon: MessageCircle, path: '/team', description: 'Work with your team' },
-    { name: 'Gamification', icon: Trophy, path: '/gamification', description: 'Earn rewards and badges' },
     { name: 'Analytics', icon: TrendingUp, path: '/analytics', description: 'Detailed insights' },
     { name: 'Reports', icon: BookOpen, path: '/reports', description: 'Generate reports' }
   ];

@@ -16,7 +16,6 @@ import TrendsDashboard from './Component/TrendsDashboard';
 import CompetitorTracking from './Component/CompetitorTracking';
 import FundingCalculator from './Component/FundingCalculator';
 import TeamCollaboration from './Component/TeamCollaboration';
-import Gamification from './Component/Gamification';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -85,7 +84,6 @@ function App() {
       { label: 'Go: Competitors', path: '/competitors' },
       { label: 'Go: Funding Calculator', path: '/funding' },
       { label: 'Go: Team Collaboration', path: '/team' },
-      { label: 'Go: Gamification', path: '/gamification' },
       { label: 'Action: Open AI Assistant', action: () => setShowAIChat(true) }
     ];
     const query = (cmdkQuery || '').toLowerCase();
@@ -158,9 +156,6 @@ function App() {
             } />
             <Route path="/team" element={
               user ? <TeamCollaboration user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
-            } />
-            <Route path="/gamification" element={
-              user ? <Gamification user={user} /> : <Home user={user} onLogin={() => setShowAuth(true)} />
             } />
           </Routes>
         </main>
