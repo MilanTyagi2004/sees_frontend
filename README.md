@@ -1,4 +1,4 @@
-# Yash Frontend - Business Idea Validation Platform
+# Business Idea Validation Platform
 
 A React-based web application for validating business ideas with AI-powered suggestions, analytics, and comprehensive reporting features.
 
