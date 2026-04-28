@@ -172,13 +172,6 @@ REACT_APP_AI_SERVICE_KEY=your_ai_service_key_here
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is private and proprietary.
-
-## 📞 Support
-
-For support and questions, please contact the development team.
 
 ---
 
